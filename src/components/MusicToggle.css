@@ -1,0 +1,56 @@
+.music-toggle {
+  position: fixed;
+  top: 1.1rem;
+  right: 1.1rem;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid rgba(247, 241, 234, 0.22);
+  background: rgba(61, 28, 22, 0.55);
+  color: var(--ivory);
+  backdrop-filter: blur(10px);
+  border-radius: 999px;
+  padding: 0.65rem 0.95rem;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.music-toggle__bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.music-toggle__bars i {
+  width: 2px;
+  height: 6px;
+  background: var(--cinnamon);
+  display: block;
+  border-radius: 2px;
+}
+
+.music-toggle.is-on .music-toggle__bars i {
+  animation: pulse 0.9s ease-in-out infinite;
+}
+
+.music-toggle.is-on .music-toggle__bars i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.music-toggle.is-on .music-toggle__bars i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    height: 5px;
+  }
+  50% {
+    height: 12px;
+  }
+}

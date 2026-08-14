@@ -1,0 +1,42 @@
+.countdown {
+  background:
+    linear-gradient(180deg, #f3e9e1, #ead9ce);
+}
+
+.countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.countdown__cell {
+  text-align: center;
+  padding: 1.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(95, 48, 38, 0.06);
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+}
+
+.countdown__cell strong {
+  display: block;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--espresso);
+  line-height: 1;
+}
+
+.countdown__cell span {
+  display: block;
+  margin-top: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .countdown__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

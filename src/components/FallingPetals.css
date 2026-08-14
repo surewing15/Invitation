@@ -1,0 +1,28 @@
+.petals {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 40;
+}
+
+.petal {
+  position: absolute;
+  top: -40px;
+  border-radius: 70% 10% 70% 10%;
+  background: linear-gradient(135deg, #e6c6af, #c0794f 45%, #9a4d33);
+  transform: rotate(25deg);
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  box-shadow: 0 2px 8px rgba(95, 48, 38, 0.18);
+}
+
+@keyframes fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(var(--drift, 20px), 110vh, 0) rotate(360deg);
+  }
+}

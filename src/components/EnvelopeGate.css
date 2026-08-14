@@ -1,0 +1,438 @@
+.gate {
+  --env: #9a4d33;
+  --env-deep: #5f3026;
+  --env-soft: #c0794f;
+  --hint: #8a6558;
+  --linen: #f3e9e1;
+  --ink: #5f3026;
+
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.25rem 5.5rem;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--linen);
+  color: var(--hint);
+  user-select: none;
+}
+
+.gate__linen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(120, 90, 70, 0.045) 0 1px,
+      transparent 1px 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(120, 90, 70, 0.035) 0 1px,
+      transparent 1px 3px
+    );
+}
+
+.gate__scene {
+  position: relative;
+  z-index: 1;
+  width: min(640px, 94vw);
+  display: grid;
+  place-items: center;
+}
+
+.envelope {
+  position: relative;
+  width: min(580px, 92vw);
+  aspect-ratio: 1.45 / 1.15;
+  transition: width 0.85s cubic-bezier(0.22, 1, 0.36, 1), aspect-ratio 0.85s ease;
+}
+
+.envelope.is-letter {
+  width: min(640px, 94vw);
+  aspect-ratio: 3 / 2;
+}
+
+.envelope__behind,
+.envelope__ahead {
+  position: absolute;
+  inset: 0;
+  transform: translateY(0);
+  opacity: 1;
+  transition:
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.7s ease 0.1s;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.envelope__behind {
+  z-index: 1;
+}
+
+.envelope__ahead {
+  z-index: 3;
+}
+
+.envelope.is-letter .envelope__behind,
+.envelope.is-letter .envelope__ahead {
+  transform: translateY(120%);
+  opacity: 0;
+}
+
+.envelope__shadow {
+  position: absolute;
+  inset: 30% 4% -6%;
+  background: radial-gradient(ellipse at center, rgba(95, 48, 38, 0.22), transparent 70%);
+  filter: blur(10px);
+  z-index: 0;
+}
+
+.envelope__back {
+  position: absolute;
+  inset: 30% 0 0;
+  background: linear-gradient(180deg, var(--env-soft), var(--env));
+  border-radius: 2px;
+  z-index: 1;
+  box-shadow: 0 16px 34px rgba(95, 48, 38, 0.2);
+}
+
+.envelope__letter {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 2%;
+  height: 88%;
+  background: #f7f1ea;
+  border-radius: 1px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem 1.2rem 1.6rem;
+  text-align: center;
+  color: #5f3026;
+  box-shadow: 0 8px 16px rgba(95, 48, 38, 0.1);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(52%);
+  transition:
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.28s,
+    opacity 0.55s ease 0.28s,
+    left 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    right 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.85s ease,
+    box-shadow 0.85s ease,
+    z-index 0s;
+  will-change: transform, opacity;
+}
+
+.envelope.is-open .envelope__letter {
+  opacity: 1;
+  transform: translateY(-38%);
+}
+
+.envelope.is-letter .envelope__letter {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 5;
+  opacity: 1;
+  transform: translateY(0);
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.6rem, 5vw, 3rem);
+  box-shadow: 0 24px 60px rgba(95, 48, 38, 0.22);
+  transition:
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease,
+    left 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    right 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.85s ease,
+    box-shadow 0.85s ease;
+}
+
+.envelope.is-letter .envelope__names {
+  font-size: clamp(3.2rem, 11vw, 5rem);
+  margin: 0.7rem 0;
+  transition: font-size 0.85s ease, margin 0.85s ease;
+}
+
+.envelope.is-letter .envelope__invite {
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  transition: font-size 0.85s ease;
+}
+
+.envelope.is-letter .envelope__sub {
+  font-size: clamp(0.95rem, 2.4vw, 1.15rem);
+  transition: font-size 0.85s ease;
+}
+
+.envelope.is-letter .envelope__date {
+  font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+  transition: font-size 0.85s ease;
+}
+
+.envelope.is-letter .ornament {
+  width: 52px;
+  height: 52px;
+  top: 14px;
+  left: 14px;
+  background:
+    linear-gradient(#5f3026, #5f3026) left top / 22px 1.5px no-repeat,
+    linear-gradient(#5f3026, #5f3026) left top / 1.5px 22px no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 62%, #5f3026 63%, #5f3026 66%, transparent 67%)
+      4px 4px / 28px 28px no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 72%, #5f3026 73%, #5f3026 75.5%, transparent 76.5%)
+      10px 10px / 34px 34px no-repeat;
+}
+
+.envelope.is-letter .ornament--tr {
+  top: 14px;
+  right: 14px;
+  left: auto;
+}
+
+.envelope.is-letter .ornament--bl {
+  top: auto;
+  bottom: 14px;
+  left: 14px;
+}
+
+.envelope.is-letter .ornament--br {
+  top: auto;
+  bottom: 14px;
+  right: 14px;
+  left: auto;
+}
+
+.envelope__invite {
+  margin: 0;
+  font-size: clamp(1.05rem, 2.8vw, 1.35rem);
+  line-height: 1.25;
+  color: #5f3026;
+}
+
+.envelope__sub {
+  margin: 0.2rem 0 0;
+  font-size: clamp(0.9rem, 2.4vw, 1.1rem);
+  color: #5f3026;
+}
+
+.envelope__names {
+  margin: 0.55rem 0 0.45rem;
+  font-size: clamp(2.4rem, 8vw, 3.8rem);
+  line-height: 1.05;
+  color: #5f3026;
+  font-weight: 400;
+}
+
+.envelope__date {
+  margin: 0;
+  letter-spacing: 0.32em;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  color: #5f3026;
+}
+
+.envelope__front {
+  position: absolute;
+  inset: 30% 0 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.envelope__wing {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(180deg, var(--env-soft), var(--env));
+  transition:
+    clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.55s ease;
+}
+
+.envelope__wing--left {
+  left: 0;
+}
+
+.envelope__wing--right {
+  right: 0;
+}
+
+.envelope__base {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, var(--env), var(--env-deep));
+  border-radius: 0 0 2px 2px;
+  box-shadow: inset 0 8px 14px rgba(0, 0, 0, 0.12);
+  transition: top 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.envelope.is-open .envelope__wing {
+  height: 72%;
+  background: linear-gradient(165deg, var(--env-soft), var(--env) 55%, var(--env-deep));
+}
+
+.envelope.is-open .envelope__wing--left {
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.envelope.is-open .envelope__wing--right {
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+}
+
+.envelope.is-open .envelope__base {
+  top: 64%;
+}
+
+.envelope__flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  transform-origin: top center;
+}
+
+.envelope__flap--closed {
+  top: 30%;
+  height: 42%;
+  background: linear-gradient(180deg, var(--env-soft), var(--env-deep));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 5;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
+  opacity: 1;
+  transform: scaleY(1);
+  transition:
+    opacity 0.4s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.envelope.is-open .envelope__flap--closed {
+  opacity: 0;
+  transform: scaleY(0.15) translateY(-8px);
+  pointer-events: none;
+}
+
+.envelope__flap--open {
+  top: 0;
+  height: 34%;
+  background: linear-gradient(180deg, var(--env-soft), var(--env));
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(20px) scaleY(0.4);
+  transition:
+    opacity 0.45s ease 0.1s,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.envelope.is-open .envelope__flap--open {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
+.ornament {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  opacity: 0.9;
+  pointer-events: none;
+  background:
+    linear-gradient(#5f3026, #5f3026) left top / 22px 1.5px no-repeat,
+    linear-gradient(#5f3026, #5f3026) left top / 1.5px 22px no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 62%, #5f3026 63%, #5f3026 66%, transparent 67%)
+      4px 4px / 28px 28px no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 72%, #5f3026 73%, #5f3026 75.5%, transparent 76.5%)
+      10px 10px / 34px 34px no-repeat;
+}
+
+.ornament--tl {
+  top: 14px;
+  left: 14px;
+}
+
+.ornament--tr {
+  top: 14px;
+  right: 14px;
+  transform: scaleX(-1);
+}
+
+.ornament--bl {
+  bottom: 14px;
+  left: 14px;
+  transform: scaleY(-1);
+}
+
+.ornament--br {
+  bottom: 14px;
+  right: 14px;
+  transform: scale(-1);
+}
+
+.envelope__letter .ornament {
+  width: 40px;
+  height: 40px;
+  background:
+    linear-gradient(#5f3026, #5f3026) left top / 16px 1.25px no-repeat,
+    linear-gradient(#5f3026, #5f3026) left top / 1.25px 16px no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 62%, #5f3026 63%, #5f3026 66%, transparent 67%)
+      2px 2px / 22px 22px no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 72%, #5f3026 73%, #5f3026 75.5%, transparent 76.5%)
+      7px 7px / 26px 26px no-repeat;
+}
+
+.envelope__letter .ornament--tl {
+  top: 10px;
+  left: 10px;
+}
+
+.envelope__letter .ornament--tr {
+  top: 10px;
+  right: 10px;
+}
+
+.envelope__letter .ornament--bl {
+  bottom: 10px;
+  left: 10px;
+}
+
+.envelope__letter .ornament--br {
+  bottom: 10px;
+  right: 10px;
+}
+
+.gate__hint {
+  position: absolute;
+  bottom: clamp(1.8rem, 6vh, 3rem);
+  margin: 0;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--hint);
+  z-index: 6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope,
+  .envelope__behind,
+  .envelope__ahead,
+  .envelope__letter,
+  .envelope__wing,
+  .envelope__base,
+  .envelope__flap--closed,
+  .envelope__flap--open {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}
