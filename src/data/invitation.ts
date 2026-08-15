@@ -44,7 +44,8 @@ export const invitation = {
       detail: 'Marco Hotel, Cugman, Cagayan de Oro City',
     },
   ],
-  dressCode: 'Formal',
+  dressCode:
+    'We kindly request our guests to wear formal attire in any shade of brown as we celebrate our special day.',
   seatingNote:
     'We respectfully request no plus ones, as seating is limited. Thank you for your understanding and cooperation.',
   rsvpDeadline: 'September 20, 2026',
