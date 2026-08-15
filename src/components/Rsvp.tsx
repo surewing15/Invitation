@@ -50,8 +50,7 @@ export function Rsvp() {
           <span className="eyebrow">RSVP</span>
           <h2>Will you be there?</h2>
           <p>
-            Kindly confirm your attendance by {invitation.rsvpDeadline}.{' '}
-            {invitation.seatingNote}
+            Kindly confirm your attendance by {invitation.rsvpDeadline}.
           </p>
         </div>
 

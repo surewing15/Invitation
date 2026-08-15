@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { invitation } from '../data/invitation'
+import dressCodePalette from '../../Revise/dress code.jpg'
 import './Details.css'
 
 export function Details() {
@@ -65,7 +66,11 @@ export function Details() {
           <div>
             <p className="eyebrow">Dress code</p>
             <p className="details__dress">{invitation.dressCode}</p>
-            <p className="details__note">{invitation.seatingNote}</p>
+            <img
+              className="details__palette"
+              src={dressCodePalette}
+              alt="Suggested brown shades for formal attire"
+            />
           </div>
         </motion.div>
       </div>

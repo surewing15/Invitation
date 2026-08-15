@@ -105,6 +105,15 @@
   font-size: 1.08rem;
 }
 
+.details__palette {
+  display: block;
+  margin: 1rem 0 0;
+  width: min(100%, 17rem);
+  height: auto;
+  border-radius: 14px;
+  background: rgba(247, 241, 234, 0.95);
+}
+
 .details__note {
   margin: 0.65rem 0 0;
   font-size: 0.95rem;
